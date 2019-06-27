@@ -1,0 +1,3 @@
+deploymentReplicas: 1
+orchestratorImage: 'us.gcr.io/hsp-splat-dev/splat-orchestrator:latest'
+orchestratorImageVersion: '0.7.2'
