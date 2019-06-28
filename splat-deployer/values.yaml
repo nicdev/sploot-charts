@@ -1,4 +1,7 @@
 deploymentReplicas: 1
-orchestratorImage: 'nicdev/sploot:0.8.0'
-orchestratorImageVersion: '0.8.0'
-orchestratorContainerPort: 80
+orchestratorImage: 'us.gcr.io/hsp-splat-dev/splat-orchestrator:0.9.2'
+orchestratorImageVersion: '0.9.2'
+orchestratorContainerPort: 3100
+connectorImage: 'us.gcr.io/hsp-splat-dev/splat-connector:0.9.1'
+connectorImageVersion: '0.9.1'
+connectorContainerPort: 3200

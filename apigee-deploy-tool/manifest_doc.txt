@@ -1,0 +1,115 @@
+# APL Launch Tool - Manifest Configuration Specification
+# API Management Services Team
+
+api-deployment:
+  options:
+    # Whether Platform security is to be integrated with the proxy deployments. Default is true.
+    platform-integration:
+      security: <true | false> # default is true
+  # The following mandatory section provides the api-team identity.
+  api-team:
+    # This UNIQUE name is prepended or prefixed to the proxy/shared-flow bundle name to distinguish them from other
+    # team's deployments. If team name is already included in a resource name, then ALT will not perform the prepend
+    # action.
+    name: enage
+    # proxy-base-path: api-deployment.api-team.url-path-namespace + api-deployment.specs.api-proxies.base-path
+    url-path-namespace: <base-path-prefix>
+  # The api-proxies under the entitlements-registration section should correspond to the api-proxies under either
+  # specs or bundles section and is a required section, if any one of the two is provided. This means that the
+  # name of the api-proxies under either specs or bundles should match with the api-proxies name under entitlements
+  # registration.
+  # This is to facilitate the deployed apigee proxy's registration with the NCR entitlements service. So, for example,
+  # if we have 2 proxy bundles to be deployed under the bundles/api-proxies section, the
+  # api-manifest/api-proxies must also have two set of values each corresponding to the two proxies so as to make sure
+  # of their registration with entitlements service.
+  entitlements-registration:
+    api-proxies:
+      - name: /engage/v1
+        #! optional
+        tags:
+          - apims
+          - testing
+          - enage
+        #! if platform-integration is true, at least one privileged operation along with minimum one role is
+        #! necessary for successful deployment of proxy and its registration to the API Entitlement service.
+        privileged-operations:
+          - operationId: one
+            roles:
+              - role-1
+              - role-2
+            scopes:
+              - scope-1
+              - scope-2
+          - operationId: two
+            roles:
+              - role-1
+              - role-2
+            scopes:
+              - scope-1
+      - name: <api-proxy-name-2>
+          #! optional
+          tags:
+            - apims
+            - testing
+          #! if platform-integration is true, at least one privileged operation along with minimum one role is
+          #! necessary for successful deployment of proxy and its registration to the API Entitlement service.
+          privileged-operations:
+            - operationId: one
+              roles:
+                - role-1
+                - role-2
+              scopes:
+                - scope-1
+                - scope-2
+  # Fields remarked as "Optional" needs to be completely removed, if not required to be used in deployment.
+  # The section for OpenAPI Spec proxies deployment to apigee. Optional.
+  specs:
+    #! The following parameter values must be provided unless noted as optional
+    api-proxies:
+      - name: enagage-dev-proxy
+        description: SPLAT Orchestrator Proxy
+        open-api-version: 3.0
+        base-path: /v1
+        service:
+          base-url: http://34.98.93.17
+          service-uri: /v2
+          contract-uri: /docs
+  # The section for bundle deployment to apigee. Optional.
+  bundles:
+    #! apigee proxy bundle names to be deployed.
+    api-proxies:
+      - <api-proxy-name-1>
+      - <api-proxy-name-2>
+    #! shared-flow bundle names to be deployed.
+    shared-flows:
+      - <shared-flow-bundle-1>
+      - <shared-flow-bundle-2>
+  # The section for KV maps creation in apigee. Optional.
+
+  resources:
+  #The values below can be overridden using the resources-override.yaml file when promoting to different environments.
+  kv-maps:
+    - name: <kv-map-name>
+      encrypted: <true | false>
+      entry:
+        - key: <kv-map-key>
+          value: <kv-map-value>
+  # The section for apigee cache creation in apigee. Optional.
+  caches:
+    - name: <cache-name>
+      description: <cache-description> # Optional.
+      expiry-settings: # Optional. Default expiry setting is 300 seconds.
+        # Options include:
+        #    time-out-in-sec (xx)
+        #    time-of-day (hh:mm:ss)
+        #    expiry-date (mm-dd-yyyy)
+        time-out-in-sec:
+          value: <xx>
+        values-null: <true | false> # Optional. Default: false
+      over-flow-to-disk: <true | false> # Optional. Default: false
+      skip-cache-if-element-size-in-kb-exceeds: <num-elements> # Optional. Default: disabled
+  # The section for apigee target-server creation in apigee. Optional.
+  target-servers:
+    - name: <server-name>
+      host: <host-name | ip-address>
+   

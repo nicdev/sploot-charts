@@ -20,5 +20,6 @@ spec:
       containers:
       - name: splat-orchestrator
         image: {{ .Values.orchestratorImage }}
+        imagePullPolicy: IfNotPresent
         ports:
           - containerPort: {{ .Values.orchestratorContainerPort }}

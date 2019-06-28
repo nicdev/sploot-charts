@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: orchestrator-service
+  labels:
+    name: orchestrator-service
+    app: splat
+spec:
+  type: NodePort
+  selector:
+    name: orchestrator-pod
+    app: splat
+  ports:
+  - port: 80
+    targetPort: {{ .Values.orchestratorContainerPort }}
