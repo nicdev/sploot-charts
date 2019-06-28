@@ -2,13 +2,13 @@ apiVersion: v1
 entries:
   splat-deployer:
   - appVersion: 1.0.0
-    created: "2019-06-27T19:56:06.490908-04:00"
+    created: "2019-06-27T21:08:12.6386-04:00"
     description: Helm chart for SPLOOT microservices deployment
-    digest: 7db9dd10373373ff336a5c7cfefc6819b12bb218eddcd1044e4da59817d0106b
+    digest: 96e676b3d7b005ee31728c268054219fe2bbb380707066a44764c0a4eb335311
     maintainers:
     - name: NCR, TinRoof Software
     name: splat-deployer
     urls:
     - splat-deployer-0.8.0.tgz
     version: 0.8.0
-generated: "2019-06-27T19:56:06.489449-04:00"
+generated: "2019-06-27T21:08:12.636495-04:00"

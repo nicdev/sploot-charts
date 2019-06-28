@@ -1,4 +1,0 @@
-deploymentReplicas: 1
-orchestratorImage: 'nicdev/sploot:0.8.0'
-orchestratorImageVersion: '0.8.0'
-orchestratorContainerPort: 3000
